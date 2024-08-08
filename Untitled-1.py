@@ -1,9 +1,7 @@
 from pyspark.sql import SparkSession
 
+spark = SparkSession.builder.appName('Learning').getOrCreate()
 
-spark = SparkSession.builder \
-    .appName("MyApp") \
-    .master("local[2]") \
-    .config("spark.executor.memory", "2g") \
-    .getOrCreate()
-print(spark)
+df = spark.read.csv('./vgsales.csv',header=True, inferSchema=True)
+
+df.printSchema()
